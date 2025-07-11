@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City Web Portal - AI-Driven Digital Urban Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E5470;
+            --secondary: #34729C;
+            --accent: #6CB1DA;
+            --light-blue: #D1ECFF;
+            --teal: #6EC1D1;
+            --light-teal: #C8EAEC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-teal) 100%);
+        }
+
+        /* Parallax Container */
+        .parallax-container {
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 { width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s; }
+        .shape-2 { width: 150px; height: 150px; top: 60%; right: 15%; animation-delay: 2s; }
+        .shape-3 { width: 80px; height: 80px; top: 40%; left: 70%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-buttons {
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--teal), var(--accent));
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, var(--accent), var(--teal));
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .btn-secondary-custom:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* 3D City Model */
+        .city-3d {
+            position: absolute;
+            right: -10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 600px;
+            height: 400px;
+            z-index: 1;
+        }
+
+        .building {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border-radius: 5px;
+            animation: buildingGlow 3s ease-in-out infinite alternate;
+        }
+
+        .building-1 { width: 40px; height: 120px; bottom: 0; left: 50px; animation-delay: 0s; }
+        .building-2 { width: 50px; height: 80px; bottom: 0; left: 100px; animation-delay: 0.5s; }
+        .building-3 { width: 35px; height: 150px; bottom: 0; left: 160px; animation-delay: 1s; }
+        .building-4 { width: 45px; height: 100px; bottom: 0; left: 210px; animation-delay: 1.5s; }
+
+        @keyframes buildingGlow {
+            0% { box-shadow: 0 0 20px rgba(108, 177, 218, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(108, 177, 218, 0.8); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--teal), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            position: relative;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 177, 218, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotateY(360deg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-teal) 100%);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-right: 25px;
+            min-width: 80px;
+        }
+
+        /* APIs Section */
+        .apis-section {
+            background: var(--primary);
+            color: white;
+        }
+
+        .api-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .api-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .api-logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Tech Stack Section */
+        .tech-section {
+            background: white;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(30, 84, 112, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom.scrolled {
+            background: var(--primary);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--light-blue) !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+            .city-3d { display: none; }
+            .btn-secondary-custom { margin-left: 0; margin-top: 15px; }
+            .cta-buttons { text-align: center; }
+            .cta-buttons .btn { display: block; width: 100%; }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-city"></i> SmartCity Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#benefits">Benefits</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#apis">APIs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="parallax-container">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg-elements">
+                <div class="floating-shape shape-1"></div>
+                <div class="floating-shape shape-2"></div>
+                <div class="floating-shape shape-3"></div>
+            </div>
+            
+            <div class="city-3d">
+                <div class="building building-1"></div>
+                <div class="building building-2"></div>
+                <div class="building building-3"></div>
+                <div class="building building-4"></div>
+            </div>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Smart City Web Portal</h1>
+                            <h2 class="hero-subtitle">AI-Driven Digital Urban Management</h2>
+                            <p class="hero-description">
+                                Experience the future of urban living with our comprehensive web-based smart city platform. 
+                                Leveraging cutting-edge AI, APIs, and data analytics to simulate and enable intelligent city 
+                                services for mobility, governance, environment, infrastructure, and citizen engagement.
+                            </p>
+                            <div class="cta-buttons">
+                                <button class="btn btn-primary-custom" onclick="window.location.href='/dashboard'">Explore Platform</button>
+                                <button class="btn btn-secondary-custom" onclick="window.location.href='healthchatbot.html'">AI Help</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section features-section">
+            <div class="container">
+                <h2 class="section-title scroll-animate">Intelligent Features</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                            <h3 class="feature-title">AI Smart Governance</h3>
+                            <p>Virtual chatbot for government services, automated grievance system, and document verification using OCR APIs.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-route"></i></div>
+                            <h3 class="feature-title">Smart Mobility</h3>
+                            <p>AI-based traffic prediction, route planning with Google Maps, and intelligent public transport management.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                            <h3 class="feature-title">Environmental Dashboard</h3>
+                            <p>Real-time pollution monitoring, AI waste management tips, and carbon footprint calculator for sustainability.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3 class="feature-title">Smart Healthcare</h3>
+                            <p>AI-powered symptom checker, hospital locator, and intelligent public safety assistance system.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3 class="feature-title">Infrastructure Analytics</h3>
+                            <p>Predictive analytics for resource management and comprehensive utility usage simulation dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 scroll-animate">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-users"></i></div>
+                            <h3 class="feature-title">Civic Engagement</h3>
+                            <p>Community voting systems, gamified civic education, and AI-powered city improvement suggestions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="section benefits-section">
+            <div class="container">
+                <h2 class="section-title scroll-animate">Key Benefits</h2>
+                <div class="row">
+                    <div class="col-lg-6 scroll-animate">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-rocket"></i></div>
+                            <div>
+                                <h4>Fully Scalable & Accessible</h4>
+                                <p>No hardware requirements - completely web-based solution accessible from anywhere, anytime.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 scroll-animate">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-heart"></i></div>
+                            <div>
+                                <h4>High Community Impact</h4>
+                                <p>Direct positive impact on citizens through improved services and enhanced quality of life.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 scroll-animate">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-cogs"></i></div>
+                            <div>
+                                <h4>IoT Integration Ready</h4>
+                                <p>Prepared groundwork for seamless future integration with IoT devices and sensors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 scroll-animate">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-trophy"></i></div>
+                            <div>
+                                <h4>Demo & Portfolio Ready</h4>
+                                <p>Perfect for live demonstrations, hackathons, and professional portfolio showcase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APIs Section -->
+        <section id="apis" class="section apis-section">
+            <div class="container">
+                <h2 class="section-title scroll-animate" style="color: white;">Integrated APIs & AI</h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-comments"></i></div>
+                            <h4>OpenAI API</h4>
+                            <p>Chatbot & Content Generation</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-map"></i></div>
+                            <h4>Google Maps</h4>
+                            <p>Maps & Route Planning</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-cloud"></i></div>
+                            <h4>OpenWeather</h4>
+                            <p>Weather & Air Quality</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-stethoscope"></i></div>
+                            <h4>Healthcare APIs</h4>
+                            <p>Medical Assistance & Info</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-eye"></i></div>
+                            <h4>Vision API</h4>
+                            <p>OCR & Document Processing</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-database"></i></div>
+                            <h4>MongoDB Atlas</h4>
+                            <p>Cloud Database Services</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-shield-alt"></i></div>
+                            <h4>ALPHAVANTAGE</h4>
+                            <p>Stocks and cryptocurrency</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 scroll-animate">
+                        <div class="api-card">
+                            <div class="api-logo"><i class="fas fa-chart-bar"></i></div>
+                            <h4>News API</h4>
+                            <p>Latest  news data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js">
+
+    </script>
+</body>
+</html>

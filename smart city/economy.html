@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Economy - Ballarpur & Chandrapur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+           :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --info-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-gradient: linear-gradient(135deg, #434343 0%, #000000 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-weight: 400;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            transform: translateY(-2px);
+        }
+
+       
+        .navbar-nav .nav-link.active {
+            background: var(--success-gradient);
+            color: white !important;
+            box-shadow: var(--shadow-sm);
+        }
+        /* Container */
+        .container {
+            padding-top: 100px;
+        }
+
+        /* Glass Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            border-radius: 20px 20px 0 0 !important;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Enhanced Header */
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .page-header h1 {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .page-header i {
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Currency Card */
+        .currency-card {
+            background: var(--info-gradient);
+            border: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .currency-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+
+        .currency-card .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .currency-card h3 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Form Select */
+        .form-select {
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            background: white;
+        }
+
+        /* Stock Table */
+        .table {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 1rem;
+        }
+
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) > td {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        /* Commodity Cards */
+        .commodity-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gold-card {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .oil-card {
+            background: var(--dark-gradient);
+            color: white;
+        }
+
+        .commodity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+
+        .commodity-card .card-header,
+        .commodity-card .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .commodity-card h3 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Economy Stats */
+        .economy-stat {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .economy-stat:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .economy-stat h4 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .economy-stat p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Location Info */
+        .location-info-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .location-info-item:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .location-info-item h6 {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-info-item h5 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Spinner */
+        .spinner-border {
+            color: #667eea;
+        }
+
+        /* Positive/Negative Changes */
+        .text-success {
+            color: #28a745 !important;
+            font-weight: 600;
+        }
+
+        .text-danger {
+            color: #dc3545 !important;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 80px;
+            }
+            
+            .page-header {
+                padding: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .card-header {
+                padding: 1rem;
+            }
+            
+            .commodity-card h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Market Status Badges */
+        .market-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .market-status.up {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+
+        .market-status.down {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        /* Icon Enhancements */
+        .card-header i {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-chart-line me-2"></i>SmartCity Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: none; box-shadow: none;">
+                <i class="fas fa-bars" style="color: var(--text-primary);"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="dashboard.html">
+                            <i class="fas fa-chart-line me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="governance.html">
+                            <i class="fas fa-building me-1"></i>Governance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="environment.html">
+                            <i class="fas fa-leaf me-1"></i>Environment
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mobility.html">
+                            <i class="fas fa-route me-1"></i>Mobility
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="economy.html">
+                            <i class="fas fa-chart-bar me-1"></i>Economy
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="living.html">
+                            <i class="fas fa-home me-1"></i>Living
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaint.html">
+                            <i class="fas fa-exclamation-triangle me-1"></i>Complaint
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4 "style="margin-top: 100px;">
+        <!-- Enhanced Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="page-header">
+                    <h1 class="h2 mb-3">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Smart Economy Dashboard
+                    </h1>
+                    <p class="text-muted mb-0">Real-time economic indicators and market data for Ballarpur & Chandrapur</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Selector & Currency -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>Select Location
+                        </h5>
+                        <select class="form-select" id="locationSelect" onchange="loadLocationData()">
+                            <option value="ballarpur">🏢 Ballarpur</option>
+                            <option value="chandrapur">🏛️ Chandrapur</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card currency-card text-white">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">
+                            <i class="fas fa-dollar-sign me-2"></i>USD to INR
+                        </h5>
+                        <h3 id="usdInrRate">Loading...</h3>
+                        <small id="currencyUpdate">Last updated: --</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Market Data -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>Indian Stock Market
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-building me-2"></i>Stock</th>
+                                        <th><i class="fas fa-rupee-sign me-2"></i>Price (₹)</th>
+                                        <th><i class="fas fa-chart-line me-2"></i>Change</th>
+                                        <th><i class="fas fa-chart-area me-2"></i>Volume</th>
+                                        <th><i class="fas fa-clock me-2"></i>Last Updated</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stockTableBody">
+                                    <tr>
+                                        <td colspan="5" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="text-muted mt-2 mb-0">Loading stock market data...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commodity Prices -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card commodity-card gold-card">
+                    <div class="card-header border-0">
+                        <h5 class="mb-0">
+                            <i class="fas fa-coins me-2"></i>Gold Price
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 id="goldPrice">Loading...</h3>
+                        <p class="mb-0 opacity-75" id="goldUpdate">Per 10 grams in INR</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card commodity-card oil-card">
+                    <div class="card-header border-0">
+                        <h5 class="mb-0">
+                            <i class="fas fa-oil-can me-2"></i>Crude Oil
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 id="oilPrice">Loading...</h3>
+                        <p class="mb-0 opacity-75" id="oilUpdate">Per barrel in USD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Economy -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-industry me-2"></i>Local Economy - <span id="selectedLocation">Ballarpur</span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="localEconomyData">
+                            <div class="col-12 text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="text-muted mt-2 mb-0">Loading local economy data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Details -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-map-marker-alt me-2"></i>Location Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="locationInfo">
+                            <div class="col-12 text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="text-muted mt-2 mb-0">Loading location information...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="economy.js"></script>
+</body>
+</html>
